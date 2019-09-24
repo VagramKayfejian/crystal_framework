@@ -1,1 +1,9 @@
+# folders
 /target/
+
+# files
+.settings
+.project
+.classpath
+.idea
+.metadata
