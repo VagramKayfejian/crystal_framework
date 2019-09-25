@@ -3,10 +3,10 @@ target/
 cache/
 results/
 test-output/
+.metadata/
 .idea/
 .git/
 .settings/
-.metadata/
 
 # files
 .project
