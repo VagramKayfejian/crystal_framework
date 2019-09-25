@@ -4,9 +4,10 @@ cache/
 results/
 test-output/
 .idea/
+.git/
+.settings/
 .metadata/
 
 # files
-.settings
 .project
 .classpath
