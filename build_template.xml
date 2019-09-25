@@ -28,10 +28,10 @@ ENVIRONMENTS:
 	<test name="test_analytics" preserve-order="true" allow-return-values="true">
 		<!-- Test Class: com.armondsarkisian.crystal.test.suite.analytics.* -->
 		<classes>
-		    <!-- Test Class: com.armondsarkisian.com.test.suite.analytics.TestAnalytics -->
-			<class name="com.armondsarkisian.crystal.test.suite.analytics.TestAnalytics">
+		    <!-- Test Class: com.armondsarkisian.com.test.suite.analytics.Test_Analytics -->
+			<class name="com.armondsarkisian.crystal.test.suite.analytics.Test_Analytics">
 				<parameter name="test_name" value="test_analytics"></parameter>
-				<parameter name="class_name" value="com.armondsarkisian.crystal.test.suite.analytics.TestAnalytics"></parameter>
+				<parameter name="class_name" value="com.armondsarkisian.crystal.test.suite.analytics.Test_Analytics"></parameter>
 
                 <!-- do not add a trailing slash in the __environment__ -->
 				<parameter name="load_url" value="__environment__"></parameter>

@@ -34,13 +34,13 @@
 ########################################################################################
 ########################################################################################
 
-browser="chrome"                  # which browser to use?
-isHeadless="false"                # run the browser in headless mode?
-isRemote="false"                  # is invoke selenium grid?
-remoteIP="127.0.0.1"              # will work only if isRemote equals true
-remotePort="4444"                 # will work only if isRemote equals true
-isProxy="false"                   # is use proxy server?
-outputFile="build.xml"            # output build file
+browser="chrome"                              # which browser to use?
+isHeadless="false"                            # run the browser in headless mode?
+isRemote="true"                               # is invoke selenium grid?
+remoteIP="127.0.0.1"                          # will work only if isRemote equals true
+remotePort="4444"                             # will work only if isRemote equals true
+isProxy="false"                               # is use proxy server?
+outputFile="build.xml"                        # output build file
 env="https://www.armondsarkisian.com"         # defaults to PROD environment
 
 ########################################################################################

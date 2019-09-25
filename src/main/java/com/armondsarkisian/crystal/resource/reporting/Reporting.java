@@ -25,29 +25,35 @@ import com.armondsarkisian.crystal.resource.proxy.BrowserMob;
 
 import net.lightbody.bmp.core.har.Har;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.testng.Reporter;
+
 //////////////////////////////////////////////////////////////////////////////////////////////
 // class
 public final class Reporting {
 
 	//////////////////////////////////////////////////////////////////////////////////////////////
 	// attribute(s) -- static
+	
+	private static final Logger logger               = LogManager.getLogger(Reporting.class);
+	
 
 	public static String folder_results              = "results";
 	public static String folder_log                  = "log";
 	public static String folder_har                  = "har";
+	private static String log_filename               = null;
 
-	private static Har har                            = null;
+	private static Har har                           = null;
 
-	private static File harFile                       = null;
+	private static File harFile                      = null;
 
-	private static String log_filename                = null;
-
-	private static FileWriter fw_log                  = null;
+	private static FileWriter fw_log                 = null;
 
 	// supporting text
-	public static final String constant_testSkip      = "Testing was disabled for this test";
-	public static final String constant_testUISkip    = "UI " + Reporting.constant_testSkip;
-	public static final String constant_testAPISkip   = "API " + Reporting.constant_testSkip;
+	public static final String constant_testSkip     = "Testing was disabled for this test";
+	public static final String constant_testUISkip   = "UI " + Reporting.constant_testSkip;
+	public static final String constant_testAPISkip  = "API " + Reporting.constant_testSkip;
 
 	public static enum TestResultState
 	{
@@ -97,6 +103,56 @@ public final class Reporting {
 	//////////////////////////////////////////////////////////////////////////////////////////////
 	// method(s) -- static	
 	
+	public static void text(String message) {
+
+		// log4j
+		logger.info(message);
+		
+		// testng
+		Reporter.log(message);
+	
+		// send message to log file?
+		if(Table.is_writeToLogFile) {
+
+			// send message to file
+			Reporting.outputStream_logFile(message);
+		}
+		
+		// send message to stdout?
+		if(Table.is_displayOutput) {
+
+			// send to stdout
+			System.out.println(message);
+		}
+			
+		return;
+	}
+	
+	public static void error(String message) {
+	
+		// log4j
+		logger.debug(message);
+		
+		// testng
+		Reporter.log(message);
+
+		// send message to log file?
+		if(Table.is_writeToLogFile) {
+			
+			// send message to file
+			Reporting.outputStream_logFile(message);
+		}
+		
+		// send message to stderr?
+		if(Table.is_displayOutput) {
+
+			// send to stderr
+			System.err.println("Exception: " + message);
+		}
+		
+		return;
+	}
+
 	public static void systemInformation() {
 		
 		// display system information?
@@ -216,44 +272,6 @@ public final class Reporting {
 		return;
 	}
 	
-	public static void text(String message) {
-	
-		// send message to log file?
-		if(Table.is_writeToLogFile) {
-			
-			// send message to file
-			Reporting.outputStream_logFile(message);
-		}
-		
-		// send message to stdout?
-		if(Table.is_displayOutput) {
-
-			// send to stdout
-			System.out.println(message);
-		}
-		
-		return;
-	}
-	
-	public static void error(String message) {
-	
-		// send message to log file?
-		if(Table.is_writeToLogFile) {
-			
-			// send message to file
-			Reporting.outputStream_logFile(message);
-		}
-		
-		// send message to stderr?
-		if(Table.is_displayOutput) {
-
-			// send to stderr
-			System.err.println("Exception: " + message);
-		}
-		
-		return;
-	}
-
 	public static void display_testCaseProgress(Reporting.TestProgressState progress, String functionName) {
 
 		Reporting.text(String.format(" --> %s: %s", progress.getTestProgressState(), functionName));
@@ -284,7 +302,7 @@ public final class Reporting {
 		Path path_filename = null;
 		
 		// create the full file path
-		Reporting.log_filename = String.format("%s/log.dat", folder_logFullPath);
+		Reporting.log_filename = String.format("%s/log_reporting.dat", folder_logFullPath);
 		
 		// attempt to delete and create the new log file
 		try {
@@ -372,13 +390,13 @@ public final class Reporting {
 		// proceed with outputting the HAR file only if proxy server was enabled and HAR settings were configured
 		if(Table.incoming_is_proxy && Table.browser_proxy_isCreateSeleniumProxy && Table.browser_proxy_isSetHarCaptureTypes) {
 
-			String folder_harFullPath = String.format("%s/%s",  Reporting.folder_results, Reporting.folder_har);
+			String folder_harFullPath = String.format("%s/%s/%s",  Reporting.folder_results, Reporting.folder_log, Reporting.folder_har);
 			
 			// get the HAR data
 			har = BrowserMob.proxy.getHar();
 			
 			// generate HAR file name based off the "page name"
-			harFile = new File(String.format("%s/%s.har", folder_harFullPath, moduleName.toString()));
+			harFile = new File(String.format("%s/har_%s.har", folder_harFullPath, moduleName.toString()));
 
 			// attempt to create new HAR file
 			try {

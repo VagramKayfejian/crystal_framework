@@ -17,8 +17,8 @@ ENVIRONMENTS:
 <suite name="crystal_test" thread-count="1" verbose="1" allow-return-values="true">
 
 	<parameter name="suite_name" value="crystal_test"></parameter>
-    <parameter name="driver_path_other" value="/Users/xasarkis/Development/ArmondSarkisian/crystal_framework/drv"></parameter> 
-    <parameter name="driver_path_win" value="C:/Users/xasarkis/Development/ArmondSarkisian/crystal_framework/drv"></parameter>
+    <parameter name="driver_path_other" value="/Users/armonds/Development/ArmondSarkisian/crystal_framework/drv"></parameter> 
+    <parameter name="driver_path_win" value="C:/Users/armonds/Development/ArmondSarkisian/crystal_framework/drv"></parameter>
 	<parameter name="is_remote" value="false"></parameter>
 	<parameter name="remote_ip" value="127.0.0.1"></parameter>
 	<parameter name="remote_port" value="4444"></parameter>
@@ -27,10 +27,10 @@ ENVIRONMENTS:
 	<test name="test_analytics" preserve-order="true" allow-return-values="true">
 		<!-- Test Class: com.armondsarkisian.crystal.test.suite.analytics.* -->
 		<classes>
-		    <!-- Test Class: com.armondsarkisian.crystal.test.suite.analytics.TestAnalytics -->
-			<class name="com.armondsarkisian.crystal.test.suite.analytics.TestAnalytics">
+		    <!-- Test Class: com.armondsarkisian.crystal.test.suite.analytics.Test_Analytics -->
+			<class name="com.armondsarkisian.crystal.test.suite.analytics.Test_Analytics">
 				<parameter name="test_name" value="test_analytics"></parameter>
-				<parameter name="class_name" value="com.armondsarkisian.crystal.test.suite.analytics.TestAnalytics"></parameter>
+				<parameter name="class_name" value="com.armondsarkisian.crystal.test.suite.analytics.Test_Analytics"></parameter>
 
                 <!-- do not add a trailing slash in the url -->
                 <parameter name="load_url" value="https://www.armondsarkisian.com"></parameter>

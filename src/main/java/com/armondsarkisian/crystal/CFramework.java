@@ -8,7 +8,10 @@ package com.armondsarkisian.crystal;
 //////////////////////////////////////////////////////////////////////////////////////////////
 // import(s)
 import org.apache.log4j.PropertyConfigurator;
+import org.apache.commons.io.FileUtils;
 
+import org.testng.TestNG;
+import org.testng.SkipException;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.AfterSuite;
@@ -32,10 +35,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;    
 
 import java.io.File;
-import java.util.ArrayList;
+import java.io.IOException;
 
-import org.testng.TestNG;
-import org.testng.SkipException;
+import java.util.ArrayList;
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // class
@@ -71,8 +73,8 @@ public class CFramework {
 	private static final boolean isRunBeforeMethod             = true;
 	private static final boolean isRunAfterMethod              = true;
 
-    private static TestNG mytestng                             = new TestNG();
-
+    public static TestNG myTestNG                              = new TestNG();
+    
 	//////////////////////////////////////////////////////////////////////////////////////////////
 	// method(s) -- static
 	
@@ -169,6 +171,23 @@ public class CFramework {
 		
 		boolean isFolder;
 		
+		try {
+			
+			// recursively deltree
+			File results = new File("results");
+
+			FileUtils.deleteDirectory(results);
+
+		}
+		catch(IllegalArgumentException e) {
+			
+			// do nothing
+		}
+		catch(IOException e) {
+			
+			// do nothing
+		}
+		
 		// attempt to create the results folder
 		try {
 
@@ -216,10 +235,10 @@ public class CFramework {
 			e.printStackTrace();
 		}
 
-		// attempt to create the results/har folder
+		// attempt to create the results/log/har folder
 		try {
 
-			String path = String.format("%s/%s", Reporting.folder_results, Reporting.folder_har);
+			String path = String.format("%s/%s/%s", Reporting.folder_results, Reporting.folder_log, Reporting.folder_har);
 
 			// does results folder not exist?
 			if(!new File(path).exists()) {
@@ -229,13 +248,13 @@ public class CFramework {
 
 				if(!isFolder) {
 					
-					Reporting.error("Error: Unable to create \'results\\har\\\' folder!");
+					Reporting.error("Error: Unable to create \'results\\log\\har\\\' folder!");
 				}
 			}
 		}
 		catch(Exception e) {
 			
-			Reporting.error("Exception: Unable to create results/har folder");
+			Reporting.error("Exception: Unable to create results/log/har folder");
 
 			e.printStackTrace();
 		}
@@ -324,14 +343,14 @@ public class CFramework {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
 		LocalDateTime now = LocalDateTime.now();  
 
+	    // overwrite the location for log4j.properties file?
+		//String log4jConfPath = "/new/path/to/log4j.properties";
+		//PropertyConfigurator.configure(log4jConfPath);
+	    
 		Reporting.text("Automation: Initialization Started");
 		Reporting.text("\n\nDate/Time: " + dtf.format(now).toString());
 	    Reporting.text("----------------------------------");
 
-	    // setup logger: log4j
-		String log4jConfPath = "./resources/log4j.properties";
-		PropertyConfigurator.configure(log4jConfPath);
-	    
 	    // is testing ui?
 	    if(Table.incoming_is_uiTest) {
 
@@ -655,7 +674,7 @@ public class CFramework {
 	@BeforeSuite(enabled=CFramework.isRunBeforeSuite, alwaysRun=true)
 	public void beforeSuite() throws Exception {
 
-        mytestng.setUseDefaultListeners(false);
+        myTestNG.setUseDefaultListeners(false);
 
 		// increase class test count
 		total_suites_count += 1;
