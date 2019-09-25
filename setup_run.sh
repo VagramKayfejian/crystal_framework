@@ -99,6 +99,7 @@ if [ "$(uname)" == "Darwin" ]; then
 	cat build_template.xml | \
 	sed "s/__driverPathOther__/$driverPathOther/g" | \
 	sed "s/__driverPathWin__/$driverPathWin/g" | \
+	sed "s/crystal_framework/crystal_framework\/drv/g" | \
 	sed "s/__environment__/$env/g" | \
 	sed "s/__browser__/$browser/g" | \
 	sed "s/__isHeadless__/$isHeadless/g" | \
