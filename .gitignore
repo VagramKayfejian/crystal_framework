@@ -1,9 +1,12 @@
 # folders
-/target/
+target/
+cache/
+results/
+test-output/
+.idea/
+.metadata/
 
 # files
 .settings
 .project
 .classpath
-.idea
-.metadata
