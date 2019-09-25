@@ -86,6 +86,7 @@ public final class BrowserMob {
             Reporting.text("Proxy: Shutting Down Web Proxy - PENDING ");
 
             BrowserMob.proxy.stop();
+            BrowserMob.proxy = null;
 
             Reporting.text("Proxy: Shutdown Web Proxy Successfully - COMPLETED");
         }
@@ -135,7 +136,6 @@ public final class BrowserMob {
 
                 seleniumProxy.setHttpProxy(hostIp + ":" + proxy.getPort());
                 seleniumProxy.setSslProxy(hostIp + ":" + proxy.getPort());
-
             }
             catch(Exception e) {
                     

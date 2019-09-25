@@ -436,10 +436,14 @@ public class CFramework {
             Browser.releaseWebDriver();
 			
             Reporting.text("Browser: Chrome/Chromium Driver Shutdown Successfully");
+	    }
+
+		// only stop the proxy if it was enabled previously
+		if (Table.incoming_is_proxy) {
 
 			// shutdown the web proxy
 			BrowserMob.stopProxy();
-	    }
+		}
 
 	    Reporting.text("------------------------------");
 		dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
