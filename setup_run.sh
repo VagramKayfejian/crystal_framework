@@ -14,7 +14,7 @@
 # STAGE:   https://
 # TEST:    https://
 # DEV:     https://
-# BRANCH:  https://<custom>
+# BRANCH:  https://
 
 # ### BROWSER SUPPORT: ###
 # chrome
@@ -25,7 +25,7 @@
 # edge
 
 # ### INSTRUCTIONS: ###
-# 1. be sure to set all the env variables
+# 1. be sure to set all the necessary env variables
 # 2. Set the specified values below including browser, isRemote, remoteIP, remotePort, isProxy, outputFile and env
 # 3. Execute the script: sh setup.run.sh
 # 4. Your built xml file will be ready to use based on the build_template.xml
@@ -35,8 +35,8 @@
 ########################################################################################
 
 browser="chrome"                  # which browser to use?
-isHeadless="false"                 # run the browser in headless mode?
-isRemote="false"                   # is invoke selenium grid?
+isHeadless="false"                # run the browser in headless mode?
+isRemote="false"                  # is invoke selenium grid?
 remoteIP="127.0.0.1"              # will work only if isRemote equals true
 remotePort="4444"                 # will work only if isRemote equals true
 isProxy="false"                   # is use proxy server?
