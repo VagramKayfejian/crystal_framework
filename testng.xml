@@ -1,0 +1,30 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="TestCrystal">
+
+    <parameter name="driver_path_other" value="/Users/xasarkis/Development/ArmondSarkisian/crystal/drv"></parameter> 
+    <parameter name="driver_path_win" value=""></parameter>
+	<parameter name="is_remote" value="false"></parameter>
+	<parameter name="remote_ip" value="127.0.0.1"></parameter>
+	<parameter name="remote_port" value="4444"></parameter>
+	<parameter name="is_proxy" value="false" />
+    <parameter name="test_name" value="test_crystal"></parameter>
+    <parameter name="load_url" value="https://www.tmz.com/pages/tips/"></parameter>
+
+    <test name="test_crystal">
+        <classes>
+            <class name="com.armondsarkisian.crystal.test.TestCrystal">
+                <methods>
+                    <include name="test">
+                        <parameter name="class_name" value="com.armondsarkisian.crystal.test.TestCrystal"></parameter>
+                        <parameter name="is_api_test" value="true" />
+                        <parameter name="is_ui_test" value="true" />
+                        <parameter name="browser" value="chrome" />
+                        <parameter name="is_headless" value="true"></parameter>
+                    </include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

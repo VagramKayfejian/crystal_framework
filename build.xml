@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<!--
+APPLICATION TITLE:
+  test automation: crystal-test
+
+ENVIRONMENTS:
+  VAR:     __var__
+  PROD:    
+  STAGE:  
+  TEST:    
+  DEV:     
+  BRANCH:  
+
+  NOTE: DO NOT add a trailing slash when configuring the https://www.armondsarkisian.com url
+-->
+
+<!-- Test Project: armondsarkisian.com -->
+<suite name="crystal_test" thread-count="1" verbose="1" allow-return-values="true">
+
+	<parameter name="suite_name" value="crystal_test"></parameter>
+    <parameter name="driver_path_other" value="/Users/xasarkis/Development/ArmondSarkisian/crystal"></parameter> 
+    <parameter name="driver_path_win" value=""></parameter>
+	<parameter name="is_remote" value="false"></parameter>
+	<parameter name="remote_ip" value="127.0.0.1"></parameter>
+	<parameter name="remote_port" value="4444"></parameter>
+	<parameter name="is_proxy" value="false" />
+
+    <!-- Test Module Name: crystal_test -->
+	<test name="crystal_test" preserve-order="true" allow-return-values="true">
+		<!-- Test Class: com.armondsarkisian.crystal.test.* -->
+		<classes>
+		    <!-- Test Class: com.armondsarkisian.com.test.TestCrystal -->
+			<class name="com.armondsarkisian.crystal.test.TestCrystal">
+				<parameter name="test_name" value="header"></parameter>
+				<parameter name="class_name" value="com.armondsarkisian.crystal.test.TestCrystal"></parameter>
+
+                <!-- do not add a trailing slash in the https://www.armondsarkisian.com -->
+				<parameter name="load_url" value="https://www.armondsarkisian.com"></parameter>
+				<parameter name="is_api_test" value="true" />
+				<parameter name="is_ui_test" value="true" />
+				<parameter name="browser" value="chrome" />
+				<parameter name="is_headless" value="false"></parameter>
+				<methods>
+
+                    <!-- Test Case: test_header -->
+					<include name="test_01">
+						<parameter name="is_run_method" value="true"></parameter>
+						<parameter name="method_name" value="test_crystal"></parameter>
+					</include>
+
+				</methods>
+			</class>
+		</classes>
+	</test>
+
+</suite>
