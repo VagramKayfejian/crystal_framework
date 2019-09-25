@@ -198,10 +198,11 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>2.22.1</version>
                     <configuration>
+                        <skipTests>true</skipTests>
+
                         <!-- Suite testng xml file to consider for test execution -->
                         <suiteXmlFiles>
                             <suiteXmlFile>build.xml</suiteXmlFile>
-                            <!-- <suiteXmlFile>adhoc_template.xml</suiteXmlFile> -->
                         </suiteXmlFiles>
                     </configuration>
                 </plugin>
