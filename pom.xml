@@ -25,6 +25,7 @@
 
     <repositories>
 	    
+        <!--
         <repository>
             <id>java-net-repo</id>
             <url>https://maven.java.net/content/repositories/public/</url>
@@ -39,6 +40,7 @@
             <id>spring-repo</id>
             <url>https://repo.spring.io/release</url>
         </repository>
+	-->
 	    
     </repositories>
 
