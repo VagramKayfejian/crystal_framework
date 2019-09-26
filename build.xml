@@ -18,8 +18,8 @@ ENVIRONMENTS:
 <suite name="crystal_test" thread-count="1" verbose="1" allow-return-values="true">
 
 	<parameter name="suite_name" value="crystal_test"></parameter>
-    <parameter name="driver_path_other" value="/Users/armonds/Development/ArmondSarkisian/crystal_framework/drv"></parameter> 
-    <parameter name="driver_path_win" value=""></parameter>
+    <parameter name="driver_path_other" value="./drv"></parameter>
+    <parameter name="driver_path_win" value="drv"></parameter>
 	<parameter name="is_remote" value="false"></parameter>
 	<parameter name="remote_ip" value="127.0.0.1"></parameter>
 	<parameter name="remote_port" value="4444"></parameter>

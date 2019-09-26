@@ -14,12 +14,15 @@ ENVIRONMENTS:
   BRANCH:  https:// 
 -->
 
-<!-- Test Project: armondsarkisian.com -->
 <suite name="crystal_test" thread-count="1" verbose="1" allow-return-values="true">
 
 	<parameter name="suite_name" value="crystal_test"></parameter>
+	<parameter name="driver_path_other" value="./drv"></parameter>
+	<parameter name="driver_path_win" value="drv"></parameter>
+	<!--
     <parameter name="driver_path_other" value="__driverPathOther__"></parameter> 
     <parameter name="driver_path_win" value="__driverPathWin__"></parameter>
+    -->
 	<parameter name="is_remote" value="__isRemote__"></parameter>
 	<parameter name="remote_ip" value="__remoteIP__"></parameter>
 	<parameter name="remote_port" value="__remotePort__"></parameter>
