@@ -11,7 +11,4 @@ test-output/
 # files
 .project
 .classpath
-.DS_Store
-chromedriver*
-geckodriver*
-selenium-standalone*
+.S_Store
