@@ -3,7 +3,6 @@ target/
 cache/
 results/
 test-output/
-drv/
 .metadata/
 .idea/
 .git/
