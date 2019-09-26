@@ -16,12 +16,12 @@ ENVIRONMENTS:
 <!-- Test Project: armondsarkisian.com -->
 <suite name="crystal_test" thread-count="1" verbose="1" allow-return-values="true">
 
-	<parameter name="suite_name" value="crystal_test"></parameter>
-    <parameter name="driver_path_other" value="./drv"></parameter>
-    <parameter name="driver_path_win" value="drv"></parameter>
-	<parameter name="is_remote" value="false"></parameter>
-	<parameter name="remote_ip" value="127.0.0.1"></parameter>
-	<parameter name="remote_port" value="4444"></parameter>
+	<parameter name="suite_name" value="crystal_test"/>
+    <parameter name="driver_path_other" value="./drv"/>
+    <parameter name="driver_path_win" value="drv"/>
+	<parameter name="is_remote" value="false"/>
+	<parameter name="remote_ip" value="127.0.0.1"/>
+	<parameter name="remote_port" value="4444"/>
 
     <!-- Test Module Name: test_analytics -->
 	<test name="test_analytics" preserve-order="true" allow-return-values="true">
@@ -29,22 +29,22 @@ ENVIRONMENTS:
 		<classes>
 		    <!-- Test Class: com.armondsarkisian.crystal.test.suite.analytics.Test_Analytics -->
 			<class name="com.armondsarkisian.crystal.test.suite.analytics.Test_Analytics">
-				<parameter name="test_name" value="test_analytics"></parameter>
-				<parameter name="class_name" value="com.armondsarkisian.crystal.test.suite.analytics.Test_Analytics"></parameter>
+				<parameter name="test_name" value="test_analytics"/>
+				<parameter name="class_name" value="com.armondsarkisian.crystal.test.suite.analytics.Test_Analytics"/>
 
                 <!-- do not add a trailing slash in the url -->
-                <parameter name="load_url" value="https://www.armondsarkisian.com"></parameter>
+                <parameter name="load_url" value="https://www.armondsarkisian.com"/>
 				<parameter name="is_proxy" value="true" />
 				<parameter name="is_api_test" value="true" />
 				<parameter name="is_ui_test" value="true" />
 				<parameter name="browser" value="chrome" />
-				<parameter name="is_headless" value="false"></parameter>
+				<parameter name="is_headless" value="false"/>
 				<methods>
 
                     <!-- Test Case: test_analytics -->
 					<include name="test_analytics">
-						<parameter name="is_run_method" value="true"></parameter>
-						<parameter name="method_name" value="test_analytics"></parameter>
+						<parameter name="is_run_method" value="true"/>
+						<parameter name="method_name" value="test_analytics"/>
 					</include>
 
 				</methods>
