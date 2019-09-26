@@ -3,6 +3,7 @@ target/
 cache/
 results/
 test-output/
+drv/
 .metadata/
 .idea/
 .git/
@@ -12,3 +13,6 @@ test-output/
 .project
 .classpath
 .DS_Store
+chromedriver*
+geckodriver*
+selenium-standalone*
