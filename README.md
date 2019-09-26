@@ -2,7 +2,7 @@
 
 # ARMONDSARKISIAN.COM
 
-###### APPLICATION: crystal framework + tests
+###### APPLICATION: crystal framework
 ###### AUTHOR(S): Armond Sarkisian
 ###### MAINTAINER(S): Armond Sarkisian
 ###### EMAIL: armond.sarkisian@gmail.com
@@ -10,10 +10,10 @@
 ###### APPROVAL DATE: 2019-09-04
 ###### VERSION: 2.0
 ###### REVISION: 0.4
-###### GIT REPO: https://github.com/asarkisian/crystal
+###### GIT REPO: https://github.com/asarkisian/crystal_framework
 ###### GIT BRANCHES: master
 ###### DESCRIPTION:
-crystal is a UI test tool that allows the QA team to validate our entire desktop test regression suite. It navigates to each specified page, verifies pre-specified checks, inspects conditions and validates the functionality of the page. It verifies every object and asserts for expected conditions and outcomes.
+crystal framework is a test harness that allows the QA team to validate their entire test regression suite in an automated fashion. It navigates to each specified page, verifies objects, inspects content, asserts conditions and validates the functionality of the page. 
 
 # SPECIFICATIONS:
 
@@ -32,26 +32,29 @@ crystal is a UI test tool that allows the QA team to validate our entire desktop
 # SUPPORTED ENVIRONMENTS:
 
   - prod   (https://)
+  - uat    (https://)
   - stage  (https://)
   - test   (https://)
   - dev    (https://)
   - branch (https://)
   
 # DIRECTORY HIERARCHY:
-  - src         ==> Contains all the source test files
-  - results     ==> Output for LOG/HAR files
-  - test-output ==> Output for TestNG reports
-  - resources   ==> Project resource properties
-  - userData    ==> User generated data
-  - target      ==> Build target
+  - src           ==> Contains all the source test files
+  - src/resources ==> Project resource properties
+  - results       ==> Output all log files
+  - test-output   ==> Output for TestNG reports
+  - cache         ==> User generated data
+  - target        ==> Build target files
 
 # CONFIG FILES:
   - pom.xml
+  - docker-compose.yml  
+  - build.xml
   - build_template.xml
   - adhoc_template.xml
   - setup_run.sh
   - log4j.properties
-  - docker-compose.yml
+  - log4j2.xml
 
 # TEST SUITES:
   - Test (base)
@@ -84,13 +87,7 @@ crystal is a UI test tool that allows the QA team to validate our entire desktop
 3. Be sure to have your SSH key setup
 
 ```sh
-$ ssh-keygen -C "$input_email" -b 4096 -t rsa -N "" -f ~/.ssh/$(echo $USER | tr '[:upper:]' '[:lower:]')_id_rsa
-$ eval "$(ssh-agent -s)"
-$ SSH_USER=~/.ssh/"$(echo $USER | tr '[:upper:]' '[:lower:]')_id_rsa"
-$ ssh-add $SSH_USER
-$ sudo chown $USER /etc/ssh/ssh_config
-$ sudo echo "   IdentityFile $SSH_USER" >> /etc/ssh/ssh_config
-$ cat ~/.ssh/id_rsa.pub | pbcopy
+$ ./configureSSH.sh # download from https://github.com/asarkisian/configuration/blob/dev/configureSSH.sh
 ```
 4. Log into github.com
 5. Upper-right hand side, click on your profile dropdown
@@ -102,32 +99,43 @@ $ cat ~/.ssh/id_rsa.pub | pbcopy
 11. Click on "Add SSH Key" which will complete the process
 
 ```sh
-$ git clone https://github.com/asarkisian/crystal  # clone project
-$ cd crystal                                       # access repo root
+$ git clone https://github.com/asarkisian/crystal_framework ~/Development/crystal_framework 
+$ cd Development/crystal_framework
+$ ls -la
 ```
 
-12. Open IDE (i.e., Eclipse)
-13. Import Maven Project - 'crystal' that is located within the crystal folder
+12. Open any IDE (i.e., Eclipse, IntelliJ)
+13. Import Maven Project - 'crystal_framework' that is located within the Development directory
 14. Go through the wizard to detect pom.xml
 15. Update and include all required plugins
-16. Edit BuildPath for the projects and ensure the version of JDK is 1.8+
-17. If on Windows, create a user environmental variable called HOME and set that to C:\Users\name_of_your_user
-18. Open the testng_template.xml file to confirm all hardcoded values are correct. Do not alter the variables that start and end with __
-19. Set QA_ENV environmental variable to the url of your desired test location. If not specified, it will default to PROD env
-20. You can set it in your shell startup file or in the CLI: export QA_CRYSTAL_TEST_ENV="url_goes_here"
-21. Open setup_run.sh and configure the run based on your needs
+16. Edit BuildPath and ensure the JDK is 1.8+
+17. Open the build_template.xml file to confirm all hardcoded values are correct. Do not alter the variables that start and end with __
+18. Set all environmental variables. If not specified, it will set to default values
+
+* QA_CRYSTAL_TEST_BROWSER
+* QA_CRYSTAL_TEST_ISHEADLESS
+* QA_CRYSTAL_TEST_ISREMOTE
+* QA_CRYSTAL_TEST_REMOTEIP
+* QA_CRYSTAL_TEST_REMOTEPORT
+* QA_CRYSTAL_TEST_ISPROXY
+* QA_CRYSTAL_TEST_ENV
+
+19. You can set it in your shell startup file or in the CLI: export QA_CRYSTAL_TEST_ENV="url_goes_here"
+20. Open setup_run.sh and configure the run based on your needs. It will generate a build.xml
 
 ``` sh
 $ export QA_CRYSTAL_TEST_ENV="https://"        # this sets environment to the specified url
-$ cd crystal                                   # access repo root
+$ cd crystal_framework                         # access repo root
 $ vim setup_run.sh                             # configure your run
-$ ls *.xml                                     # verify your generated file exists
 $ sh setup_run.sh                              # execute testng.xml generation script
+$ ls -l build.xml                              # verify your file gets generated
 ```
 
-23. Run the shell script (execute on Cygwin if on Windows)
-24. Open the build.xml file to confirm all settings are correct
-25. Clean the build and make sure all dependencies are detected
+21. Run the shell script (execute on cygwin, mingw, git-bash, wsl if on Windows)
+22. Open the build.xml file to confirm all settings are correct
+23. Clean the build and make sure all dependencies are detected
+24. You can clean using cmd: mvn clean
+25. You can compile using cmd: mvn compile
 26. Resolve any conflicts and run the project
 27. If all goes well, you will see the automation load the browser and begin testing
 
@@ -136,32 +144,69 @@ $ sh setup_run.sh                              # execute testng.xml generation s
 28. If proxy server was enabled and inspecting for HAR files, you can navigate to the logs folder and view the generated HAR files
 29. If checking for test completion status and outcomes, you can navigate to test-output folder and open up the generated HTML reports
 30. If checking for run-time logs, you can navigate to the logs folder and view the generated data file
-31. If checking for log4j events, you can view the log4j.out output file
 
 ----------------------------------------------------------------------------------------------------------------
 
 ### SELENIUM GRID: SPAWNING NEW INSTANCES:
 To enable remote, simply access either the adhoc_template.xml or setup_run.sh file and under parameters "is_remote" select true. You will need to open up multiple terminal sessions. The one I recommend is tmux - https://github.com/tmux/tmux/wiki "terminal multiplexer". You will need to start the Selenium server by specifying the path to the JAR file, hub and the respective port. You will then need to register a node with the provided ip address. 
 
-#### GRID CONSOLE:
-If the server is up and running, you can visit the Selenium console at: http://ip:port/grid/console. 
-
-#### HUB ACCESS:
-To visit the hub, visit: http://ip:port/wd/hub.
-
-#### HUB STATUS:
-To check the status of incoming connections, visit: http://ip:port/wd/hub/status which will yield a JSON file informing you the latest server status
-
-----------------------------------------------------------------------------------------------------------------
-
-### DOCKERIZATION:
-The most simple way to start a grid is with docker-compose, use the following snippet as your docker-compose.yaml, save it locally and in the same folder run docker-compose up.
-
 ``` sh
-$ docker-compose up                            # setup/run the environment
+$ java -jar selenium-server-standalone-(version).jar -role hub -port (port)
+$ java -Dwebdriver.chrome.driver="path_to_project/drv/chromedriver(.exe)" -jar selenium-server-standalone-(version).jar -role node -hub http://(ip):(port)/grid/register
 ```
 
-docker-compose.yml contents:
+#### SELENIUM GRID: GRID CONSOLE
+If the server is up and running, you can visit the Selenium console at: http://ip:port/grid/console. 
+
+#### SELENIUM GRID: HUB ACCESS
+To visit the hub, visit: http://ip:port/wd/hub.
+
+#### SELENIUM GRID: HUB STATUS
+To check the status of incoming connections, visit: http://ip:port/wd/hub/status which will yield a JSON file informing you the latest server status
+
+### DOCKERIZATION:
+Be sure you have docker installed and the daemon running in the background. Once set, you will need to generate a docker-compose.yml file.
+
+To verify if the docker daemon is running, you can execute:
+
+``` sh
+$ pgrep -f docker > /dev/null || echo "starting docker"
+```
+
+Create a new file called docker-compose.yml and populate it with either version 2 or 3 depending on your needs:
+
+Version 2:
+
+``` sh
+# To execute this docker-compose yml file use `docker-compose -f <file_name> up`
+# Add the `-d` flag at the end for detached execution
+version: '2'
+services:
+  firefox:
+    image: selenium/node-firefox:3.141.59-vanadium
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - hub
+    environment:
+      HUB_HOST: hub
+
+  chrome:
+    image: selenium/node-chrome:3.141.59-vanadium
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - hub
+    environment:
+      HUB_HOST: hub
+
+  hub:
+    image: selenium/hub:3.141.59-vanadium
+    ports:
+      - "4444:4444"
+```
+
+Version 3:
 
 ``` sh
 # To execute this docker-compose yml file use `docker-compose -f <file_name> up`
@@ -193,35 +238,16 @@ services:
       - HUB_PORT=4444
 ```
 
-You can alternatively run docker as follows by creating the grid first:
+To launch the docker container and its environment, run:
 
 ``` sh
-$ ./docker_create_selenium_grid.sh                # setup the grid
+$ docker-compose up
 ```
 
-and then execuring the command to start the grid server
+To shutdown the docker container and its environment, run:
 
 ``` sh
-$ ./docker_run_selenium_hub_3.141.59_uranium.sh   # execute the grid
-```
-
-To run the nodes, you can type:
-
-``` sh
-$ ./docker_run_node_chrome_3.141.59_uranium.shh   # if you wish to run the chrome node
-$ ./docker_run_node_firefox_3.141.59_uranium.sh   # if you wish to run the firefox node
-```
-
-To stop the containers, removes containers, networks, volumes, and images created by up, run the following command:
-
-``` sh
-$ docker-compose down                          # Stop containers, remove containers, networks, volumes and images
-```
-
-If not using docker-compose up, you can alternatively use the following command:
-
-``` sh
-$ ./docker_reset.sh                            # Resets the entire environment
+$ docker-compose down
 ```
 
 To see what docker processes are currently running:
@@ -262,9 +288,13 @@ The following applications/plugins can further aid you in getting the job done e
 | JSON/YAML Toggle Plugin | [https://chrome.google.com/webstore/detail/json-yaml-toggle/dphedhpnbojdegjcokghhfploeobobbc?hl=en] |
 | iTerm2 Terminal (for Mac) | [https://www.iterm2.com/] |
 | Cygwin Terminal (for Win) | [https://www.cygwin.com/] |
+| Mingw (for Win) | [http://www.mingw.org/category/wiki/download] |
 
 ### TODOS:
- - Expand on the crystal libraries
+ - Expand on the following areas:
+  - functional testing
+  - performance testing
+  - api testing
+  - db testing
  - Refactor all existing classes
  - Add support for more browsers
- - Run tests using different browsers
