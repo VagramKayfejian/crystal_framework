@@ -11,3 +11,4 @@ test-output/
 # files
 .project
 .classpath
+.DS_Store
