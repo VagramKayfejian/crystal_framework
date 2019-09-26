@@ -10,9 +10,10 @@
 ###### APPROVAL DATE: 2019-09-04
 ###### VERSION: 2.0
 ###### REVISION: 0.4
+###### HOMEPAGE: http://www.armondsarkisian.com
+###### GITHUB PAGE: https://asarkisian.github.io/crystal_framework/
 ###### GIT REPO: https://github.com/asarkisian/crystal_framework
 ###### GIT BRANCHES: master
-###### GITHUB PAGE: https://asarkisian.github.io/crystal_framework/
 ###### DESCRIPTION:
 crystal framework is a test harness that allows the QA team to validate their entire test regression suite in an automated fashion. It navigates to each specified page, verifies objects, inspects content, asserts conditions and validates the functionality of the page. 
 
